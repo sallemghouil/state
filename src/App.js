@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "./sallem.jpg";
 import "./App.css";
+import Profile from "./Profile";
 export default class App extends Component {
   state = {
     Person: {
@@ -10,6 +11,7 @@ export default class App extends Component {
       profession: "Software engineer",
     },
     show: false,
+    comp:0
   };
   handleShowPerson = () => {
     this.setState({
@@ -20,37 +22,15 @@ export default class App extends Component {
   componentDidMount = () => {
     setInterval(() => {
       this.setState((pre) => ({
-        show: pre.show,
+        comp: pre.comp+1,
       }));
-    }, 1);
+    }, 1000);
   };
 
   render() {
     return (
       <div>
-        {this.state.show && (
-          <div>
-            <div className="card-container">
-              <span className="pro">PRO</span>
-              <img
-                className="round"
-                src={this.state.Person.imgSrc.logo}
-                alt="user"
-              />
-              <h3>{this.state.Person.fullName}</h3>
-              <h6>Gafsa</h6>
-              <p>
-                <h3>{this.state.Person.profession}</h3>
-                <br />
-                {this.state.Person.bio}
-              </p>
-              <div className="buttons">
-                <button className="primary">Message</button>
-                <button className="primary ghost">Following</button>
-              </div>
-            </div>
-          </div>
-        )}
+        {this.state.show && <Profile state={this.state}/>}
 
         <button
           className="primary ghost"
